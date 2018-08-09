@@ -1,0 +1,23 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <td>First Name</td>
+    <td>Last Name</td>
+    <td colspan="2" align="center">Actions</td>
+    <td> Active </td>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let person of persons | paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+    <td>{{ person.firstname }}</td>
+    <td>{{ person.lastname }}</td>
+    <td><a [routerLink]="['/edit', person._id]" class="btn btn-primary">Edit</a></td>
+    <td><button (click)="deletePerson(person._id)"  class="btn btn-danger">Delete</button></td>
+    <td> <ui-switch [(ngModel)]="person.isActive" (change)="updatePerson($event, person._id)" > </ui-switch> </td>
+  </tr>
+  </tbody>
+</table>
+<br> <br> <hr>
+<span style="text-align: center;"> <pagination-controls (pageChange)="p = $event"></pagination-controls> </span>
+

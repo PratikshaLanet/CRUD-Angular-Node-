@@ -1,0 +1,31 @@
+<div class="card card-primary">
+  <div class="card-header">
+    {{ title }}
+  </div>
+  <div class="card-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">First Name</label>
+        <input type="text" class="form-control" formControlName="firstname" #firstname [(ngModel)] = "person.firstname"/>
+      </div>
+      <div *ngIf="angForm.controls['firstname'].invalid && (angForm.controls['firstname'].dirty || angForm.controls['firstname'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['firstname'].errors.required">
+          Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4">Last Name</label>
+        <input type="text" class="form-control" formControlName="lastname" #lastname [(ngModel)] = "person.lastname" />
+      </div>
+      <div *ngIf="angForm.controls['lastname'].invalid && (angForm.controls['lastname'].dirty || angForm.controls['lastname'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['lastname'].errors.required">
+          Last Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" (click)="updatePerson(firstname.value, lastname.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary"> Update </button>
+        <button type="button" (click)="updatePersonClient(firstname.value, lastname.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Client Update</button>
+      </div>
+    </form>
+  </div>
+</div>
